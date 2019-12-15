@@ -118,9 +118,11 @@ def plot_roc_auc_curve(fpr, tpr):
     plt.show()
 
     
-def plot_feature_importances(importances, columns, model, fname=None, sort=True, n_count=None):
+def plot_feature_importances(importances, columns, model, fname=None, sort=True, top_count=10):
     """
     """
+    import matplotlib.pyplot as plt
+
     if sort:
         importances, columns = zip(*sorted(zip(importances, columns)))
     plt.figure(figsize=(8, min(int(len(importances[-top_count:])/2), 20)))
