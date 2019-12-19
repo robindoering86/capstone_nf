@@ -1,7 +1,7 @@
-capstone
+Capstone Project: "Using Machine Learning to Optimize Stock Trading Strategies"
 ==============================
 
-A short description of the project.
+The aim of this capstone project is to pair a large number of technical indicators (moving averages, rate of change, relative strength indicator, etc.) with the prediction power of machine learning algorithms. The problem of stock trading decision making is articulated as a classification problem with three class values representing the ‘buy’, ‘hold’, and ‘sell’ signals. The results are evaluated using different metrics (accuracy score, cumulative returns of the strategy)
 
 Project Organization
 ------------
