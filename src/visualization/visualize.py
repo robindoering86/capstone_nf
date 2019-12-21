@@ -1,13 +1,15 @@
-def plot_corr_matrix(corr, cmap = None, mask = None):
+def plot_corr_matrix(corr, cmap = None, mask_upper = True, show_annot = False, figsize = (12, 12)):
     import matplotlib.pyplot as plt
     import seaborn as sns
     import numpy as np
-    if mask is None:
+    if mask_upper:
         # Generate a mask for the upper triangle
         mask = np.zeros_like(corr, dtype=np.bool)
         mask[np.triu_indices_from(mask)] = True
+    else:
+        mask = None
     # Set up the matplotlib figure
-    f, ax = plt.subplots(figsize=(12, 12))
+    f, ax = plt.subplots(figsize=figsize)
     # Generate a custom diverging colormap
     if cmap is None:
         cmap = sns.diverging_palette(240, 10, n=len(corr), sep=50, as_cmap=True)
@@ -21,7 +23,9 @@ def plot_corr_matrix(corr, cmap = None, mask = None):
         square=True,
         linewidths=.1,
         cbar_kws={'shrink': .6},
+        annot = show_annot,
     )
+    ax.set_ylim(corr.shape[0], 0)
     plt.title('Heatmap of Correlation between Features')
     f.tight_layout()
     
