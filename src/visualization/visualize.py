@@ -1,4 +1,4 @@
-def plot_corr_matrix(corr, cmap = None, mask_upper = True, show_annot = False, figsize = (12, 12)):
+def plot_corr_matrix(corr, cmap = None, mask_upper = True, show_annot = False, figsize = (12, 12), title = None):
     import matplotlib.pyplot as plt
     import seaborn as sns
     import numpy as np
@@ -12,21 +12,23 @@ def plot_corr_matrix(corr, cmap = None, mask_upper = True, show_annot = False, f
     f, ax = plt.subplots(figsize=figsize)
     # Generate a custom diverging colormap
     if cmap is None:
-        cmap = sns.diverging_palette(240, 10, n=len(corr), sep=50, as_cmap=True)
+        cmap = sns.diverging_palette(240, 10, n=5, sep=50, as_cmap=True)
     # Draw the heatmap with the mask and correct aspect ratio
     sns.heatmap(
         corr,
         mask=mask,
         cmap=cmap,
-        vmax=1,
+        #vmax=1,
+        robust=True,
         center=0,
         square=True,
-        linewidths=.1,
+        linewidths=.2,
         cbar_kws={'shrink': .6},
         annot = show_annot,
     )
     ax.set_ylim(corr.shape[0], 0)
-    plt.title('Heatmap of Correlation between Features')
+    title = 'Heatmap of Correlation between Features' if title is None else title
+    plt.title(title)
     f.tight_layout()
     
 
