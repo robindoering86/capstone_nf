@@ -94,15 +94,16 @@ def search_space(model):
     return space
 
 from atomm.Methods import BlockingTimeSeriesSplit
-from sklearn.model_selection import TimeSeriesSplit, cross_val_score
+from sklearn.model_selection import TimeSeriesSplit, KFold, cross_val_score
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 import time
 from hyperopt import space_eval
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
-
+from sklearn.metrics import accuracy_score
 from sklearn.ensemble import BaggingClassifier
 from sklearn.multiclass import OneVsRestClassifier
-
+import pandas as pd
+import numpy as np
 from sklearn.svm import SVC
 
 def BayesianSearch(
@@ -118,24 +119,43 @@ def BayesianSearch(
 
     start = time.time()
     
+    def cross_val_score_mod(clf,            
+                            X_, 
+                            y_,
+                            cv,
+          ):
+        score = []
+        idx = pd.IndexSlice
+        for train, test in cv:
+            clf.fit(X_.iloc[idx[train], :], y_.iloc[idx[train]])
+            pred = clf.predict(X_.iloc[idx[test], :])
+            score_ = accuracy_score(y_.iloc[idx[test]], pred)
+            score.append(score_)
+        return np.array(score)
+    
     def scale_normalize(params, data):
         s = params.get('scale')
         n = params.get('normalize')
         if s:
-            data = StandardScaler().fit_transform(data)
+            data_ = StandardScaler().fit_transform(data)
+            data = pd.DataFrame(data=data_, columns=data.columns, index=data.index)
         if n:
-            data = MinMaxScaler().fit_transform(data)
+            data_ = MinMaxScaler().fit_transform(data)
+            data = pd.DataFrame(data=data_, columns=data.columns, index=data.index)
+
         return data
     
     def get_cv_method(params, X_):
+        n_splits = 5
         cv = params.get('cv')
         if cv == 'tscv':
-            cv = TimeSeriesSplit(n_splits=5).split(X_)
+            cv = TimeSeriesSplit(n_splits=n_splits).split(X_)
         elif cv == 'btscv':
-            cv = BlockingTimeSeriesSplit(n_splits=5).split(X_)
+            cv = BlockingTimeSeriesSplit(n_splits=n_splits).split(X_)
+        elif cv == 'pcv':
+            cv = PurgedKFold()
         else:
-            cv = 5
-        
+            cv = KFold(n_splits=n_splits).split(X_)
         return cv
 
     
@@ -144,7 +164,7 @@ def BayesianSearch(
         if model_fd != None:
             model = model_fd
         X_ = X_train
-        X_ = scale_normalize(params, X_train[:])
+        X_ = scale_normalize(params, X_train)
         cv = get_cv_method(params, X_)
         try: del params['cv']
         except: pass
@@ -156,8 +176,9 @@ def BayesianSearch(
         except: pass
         clf = model(**params)
         if model == SVC:
-            clf = OneVsRestClassifier(BaggingClassifier(SVC(**params), n_estimators=50, n_jobs=-1))
-        score = cross_val_score(
+            n_estimators = 15
+            clf = OneVsRestClassifier(BaggingClassifier(SVC(**params), max_samples=1.0 / n_estimators, n_estimators=n_estimators, n_jobs=-1))
+        score = cross_val_score_mod(
             clf, 
             X_, 
             y_train,
