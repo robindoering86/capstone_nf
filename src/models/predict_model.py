@@ -4,7 +4,6 @@ import time
 from sklearn.metrics import accuracy_score, recall_score, f1_score, precision_score
 from atomm.Tools import calc_open_position
 from IPython.display import display, clear_output
-
 #import src.models.train_model import run_combinations
 def avg_model(  
     symbol_list,
