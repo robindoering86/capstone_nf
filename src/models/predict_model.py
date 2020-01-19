@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import time
 from sklearn.metrics import accuracy_score, recall_score, f1_score, precision_score
-from atomm.Tools import calc_open_position
+from atomm.Tools import calc_open_position, calc_returns
 from IPython.display import display, clear_output
 #import src.models.train_model import run_combinations
 def avg_model(  
@@ -127,10 +127,3 @@ def run_combinations(
         sys.exit(0)
     print(f'Elapsed time {round(time.time()-start, 0)}s.')
     return df_score, df_preds, df_params, df_returns
-
-def calc_returns(signals, prices):
-    returns = prices[['Close']].pct_change()
-    returns['Signal_Strat'] = calc_open_position(signals)
-    returns['Cum_Returns_Strat'] = (returns['Signal_Strat'] * returns['Close']).cumsum()
-    returns['Cum_Returns_BH'] = returns['Close'].cumsum()
-    return returns
