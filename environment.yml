@@ -5,8 +5,10 @@ channels:
 dependencies:
   - appnope=0.1.0=py37_0
   - asn1crypto=1.2.0=py37_0
+  - attrs=19.3.0=py_0
   - backcall=0.1.0=py37_0
   - blas=1.0=mkl
+  - bleach=3.1.0=py37_0
   - ca-certificates=2019.11.27=0
   - certifi=2019.11.28=py37_0
   - cffi=1.13.2=py37hb5b8e2f_0
@@ -16,6 +18,7 @@ dependencies:
   - cryptography=2.8=py37ha12b0ac_0
   - cycler=0.10.0=py37_0
   - decorator=4.4.1=py_0
+  - defusedxml=0.6.0=py_0
   - freetype=2.9.1=hb4e5f40_0
   - idna=2.8=py37_0
   - intel-openmp=2019.4=233
@@ -23,8 +26,13 @@ dependencies:
   - ipython=7.10.1=py37h39e3cac_0
   - ipython_genutils=0.2.0=py37_0
   - jedi=0.15.1=py37_0
+  - jinja2=2.10.3=py_0
+  - json5=0.8.5=py_0
+  - jsonschema=3.2.0=py37_0
   - jupyter_client=5.3.4=py37_0
   - jupyter_core=4.6.1=py37_0
+  - jupyterlab=1.2.5=pyhf63ae98_0
+  - jupyterlab_server=1.0.6=py_0
   - kiwisolver=1.1.0=py37h0a44026_0
   - libcxx=4.0.1=hcfea43d_1
   - libcxxabi=4.0.1=hcfea43d_1
@@ -33,21 +41,30 @@ dependencies:
   - libgfortran=3.0.1=h93005f0_2
   - libpng=1.6.37=ha441bb4_0
   - libsodium=1.0.16=h3efe00b_0
+  - markupsafe=1.1.1=py37h1de35cc_0
   - matplotlib=3.1.1=py37h54f8f79_0
+  - mistune=0.8.4=py37h1de35cc_0
   - mkl=2019.4=233
   - mkl-service=2.3.0=py37hfbe908c_0
   - mkl_fft=1.0.15=py37h5e564d8_0
   - mkl_random=1.1.0=py37ha771720_0
+  - nbconvert=5.6.1=py37_0
+  - nbformat=5.0.4=py_0
   - ncurses=6.1=h0a44026_1
+  - notebook=6.0.3=py37_0
+  - numpy=1.17.4=py37h890c691_0
   - numpy-base=1.17.4=py37h6575580_0
   - openssl=1.1.1d=h1de35cc_3
   - pandas=0.25.3=py37h0a44026_0
+  - pandoc=2.2.3.2=0
+  - pandocfilters=1.4.2=py37_1
   - parso=0.5.1=py_0
   - patsy=0.5.1=py37_0
   - pexpect=4.7.0=py37_0
   - pickleshare=0.7.5=py37_0
   - pip=19.3.1=py37_0
   - plotly=4.3.0=py_0
+  - prometheus_client=0.7.1=py_0
   - prompt_toolkit=3.0.2=py_0
   - ptyprocess=0.6.0=py37_0
   - pycosat=0.6.3=py37h1de35cc_0
@@ -55,6 +72,7 @@ dependencies:
   - pygments=2.5.2=py_0
   - pyopenssl=19.1.0=py37_0
   - pyparsing=2.4.5=py_0
+  - pyrsistent=0.15.7=py37h1de35cc_0
   - pysocks=1.7.1=py37_0
   - python=3.7.5=h359304d_0
   - pytz=2019.3=py_0
@@ -65,46 +83,67 @@ dependencies:
   - ruamel_yaml=0.15.46=py37h1de35cc_0
   - scipy=1.3.1=py37h1410ff5_0
   - seaborn=0.9.0=pyh91ea838_1
+  - send2trash=1.5.0=py37_0
   - setuptools=42.0.2=py37_0
   - six=1.13.0=py37_0
   - sqlite=3.30.1=ha441bb4_0
   - statsmodels=0.10.1=py37h1d22016_0
+  - terminado=0.8.3=py37_0
+  - testpath=0.4.4=py_0
   - tk=8.6.8=ha441bb4_0
   - tornado=6.0.3=py37h1de35cc_0
   - tqdm=4.40.0=py_0
   - traitlets=4.3.3=py37_0
   - urllib3=1.25.7=py37_0
   - wcwidth=0.1.7=py37_0
+  - webencodings=0.5.1=py37_1
   - wheel=0.33.6=py37_0
   - xz=5.2.4=h1de35cc_4
   - yaml=0.1.7=hc338f04_2
   - zeromq=4.3.1=h0a44026_3
+  - zipp=0.6.0=py_0
   - zlib=1.2.11=h1de35cc_3
   - pip:
+    - absl-py==0.8.1
     - alabaster==0.7.12
-    - attrs==19.3.0
+    - astor==0.8.0
     - awscli==1.16.296
     - babel==2.7.0
     - botocore==1.13.32
+    - cachetools==3.1.1
     - click==7.0
     - colorama==0.4.1
     - coverage==4.5.4
     - docutils==0.15.2
     - entrypoints==0.3
+    - example-pkg-rd==0.0.1
     - flake8==3.7.9
+    - gast==0.2.2
+    - google-auth==1.7.1
+    - google-auth-oauthlib==0.4.1
+    - google-pasta==0.1.8
+    - grpcio==1.25.0
+    - h5py==2.10.0
     - imagesize==1.1.0
     - importlib-metadata==1.2.0
-    - jinja2==2.10.3
     - jmespath==0.9.4
-    - markupsafe==1.1.1
+    - joblib==0.14.1
+    - keras-applications==1.0.8
+    - keras-preprocessing==1.1.0
+    - lightgbm==2.3.1
+    - lru-dict==1.1.6
+    - markdown==3.1.1
     - mccabe==0.6.1
     - more-itertools==8.0.0
     - msgpack-python==0.5.6
-    - numpy==1.17.4
+    - oauthlib==3.1.0
+    - opt-einsum==3.1.0
     - packaging==19.2
     - pluggy==0.13.1
+    - protobuf==3.11.1
     - py==1.8.0
     - pyasn1==0.4.8
+    - pyasn1-modules==0.2.7
     - pycodestyle==2.5.0
     - pyflakes==2.1.1
     - pymarketstore==0.17
@@ -112,8 +151,10 @@ dependencies:
     - python-dateutil==2.8.0
     - python-dotenv==0.10.3
     - pyyaml==5.1.2
+    - requests-oauthlib==1.3.0
     - rsa==3.4.2
     - s3transfer==0.2.1
+    - scikit-learn==0.22.1
     - snowballstemmer==2.0.0
     - sphinx==2.2.2
     - sphinxcontrib-applehelp==1.0.1
@@ -122,7 +163,16 @@ dependencies:
     - sphinxcontrib-jsmath==1.0.1
     - sphinxcontrib-qthelp==1.0.2
     - sphinxcontrib-serializinghtml==1.1.3
+    - tensorboard==2.0.2
+    - tensorflow==2.0.0
+    - tensorflow-estimator==2.0.1
+    - termcolor==1.1.0
+    - toolz==0.10.0
+    - torch==1.3.1
+    - trading-calendars==1.11.2
     - websocket-client==0.56.0
-    - zipp==0.6.0
-prefix: //anaconda3/envs/capstone_nf
+    - werkzeug==0.16.0
+    - wrapt==1.11.2
+    - xgboost==0.90
+prefix: /Users/robin/anaconda3/envs/capstone_nf
 
