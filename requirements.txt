@@ -18,7 +18,7 @@ colorama==0.4.1
 conda==4.7.12
 conda-package-handling==1.6.0
 coverage==4.5.4
-cryptography==2.8
+cryptography==3.2
 cycler==0.10.0
 decorator==4.4.1
 Deprecated==1.2.7
