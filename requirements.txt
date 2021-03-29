@@ -72,7 +72,7 @@ pycodestyle==2.5.0
 pycosat==0.6.3
 pycparser==2.19
 pyflakes==2.1.1
-Pygments==2.5.2
+Pygments==2.7.4
 pymarketstore==0.17
 pyOpenSSL==19.1.0
 pyparsing==2.4.5
