@@ -7,7 +7,7 @@ asyncio-nats-client==0.10.0
 -e git+http://git.atomm.de:800/root/atomm.git@9d592d8780eec330c13ef37ce2b6080337a56591#egg=atomm
 attrs==19.3.0
 awscli==1.16.296
-Babel==2.7.0
+Babel==2.9.1
 backcall==0.1.0
 botocore==1.13.32
 certifi==2019.11.28
